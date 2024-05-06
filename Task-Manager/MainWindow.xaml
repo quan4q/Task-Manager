@@ -5,8 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task_Manager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Task Manager" Height="720" Width="1280" ResizeMode="CanMinimize" FontSize="14">
     <Grid>
-
+        <!--Компановка главного окна-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="580"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="210"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <!--Поиск-->
+        <GroupBox Header="Поиск" BorderThickness="3" Margin="10,10,5,10" Padding="10">
+            <TextBox x:Name="SearchBox" VerticalContentAlignment="Center"/>
+        </GroupBox>
+        
+        <!--Категории-->
+        <GroupBox Header="Категории" BorderThickness="3" Grid.Column="1" Margin="10,10,5,10" Padding="10">
+            <ComboBox x:Name="CategoryBox" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <ComboBoxItem Content="Все"/>
+                <ComboBoxItem Content="Работа"/>
+                <ComboBoxItem Content="Дом"/>
+                <ComboBoxItem Content="Учёба"/>
+                <ComboBoxItem Content="Архив"/>
+            </ComboBox>
+        </GroupBox>
+        
+        <!--Приоритет-->
+        <GroupBox Header="Приоритет" BorderThickness="3" Grid.Column="2" Margin="10,10,5,10" Padding="10">
+            <ComboBox x:Name="PriorityBox" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <ComboBoxItem Content="Убывание"/>
+                <ComboBoxItem Content="Возрастание"/>
+            </ComboBox>
+        </GroupBox>
+        
+        <!--Дедлайн-->
+        <GroupBox Header="Дедлайн" BorderThickness="3" Grid.Column="3" Margin="10,10,5,10" Padding="10">
+            <ComboBox x:Name="Deadline" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <ComboBoxItem Content="Скоро"/>
+                <ComboBoxItem Content="Не скоро"/>
+            </ComboBox>
+        </GroupBox>
+        
+        <!--Кнопка для новой задачи-->
+        <Button x:Name="AddTaskButton" Content="Новая задача" Grid.Column="4" Margin="9,21,14,14"/>
+        
+        <!--Лист с задачами-->
+        <GroupBox Header="Задачи" BorderThickness="3" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4" Margin="10,-10,10,10" Padding="10">
+            <!--TO DO: Заполнить шаблон ListView.ItemTemplate после добавления класса Task и коллекции для хранения-->
+            <ListView>
+                <!--ЗАГЛУШКА-->
+                <ListViewItem Content="Здесь будут отображаться задачи в виде списка - '| Название | Описание | Дедлайн | Кнопки для взаимодействия |'" Height="50"/>
+            </ListView>
+        </GroupBox>
     </Grid>
 </Window>
