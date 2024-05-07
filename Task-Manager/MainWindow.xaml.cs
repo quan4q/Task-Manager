@@ -30,13 +30,14 @@ namespace Task_Manager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            //Тут будет заполнение ListView
         
         }
 
         private void AddTaskButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            Window TaskWindow = new TaskWindow();
+            TaskWindow.ShowDialog();
         }
     }
 }
