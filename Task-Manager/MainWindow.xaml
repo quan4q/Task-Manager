@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task_Manager"
         mc:Ignorable="d"
-        Title="Task Manager" Height="720" Width="1280" ResizeMode="CanMinimize" FontSize="14">
+        Title="Task Manager" Height="720" Width="1280" ResizeMode="CanMinimize" FontSize="14" Loaded="Window_Loaded">
     <Grid>
         <!--Компановка главного окна-->
         <Grid.ColumnDefinitions>
@@ -56,7 +56,7 @@
         </GroupBox>
         
         <!--Кнопка для новой задачи-->
-        <Button x:Name="AddTaskButton" Content="Новая задача" Grid.Column="4" Margin="9,21,14,14"/>
+        <Button x:Name="AddTaskButton" Content="Новая задача" Grid.Column="4" Margin="9,21,14,14" Click="AddTaskButton_Click"/>
         
         <!--Лист с задачами-->
         <GroupBox Header="Задачи" BorderThickness="3" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4" Margin="10,-10,10,10" Padding="10">

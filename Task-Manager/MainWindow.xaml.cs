@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +17,7 @@ namespace Task_Manager
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static ObservableCollection<Task> Tasks { get; } = [];
         public MainWindow()
         {
             InitializeComponent();
@@ -24,6 +26,17 @@ namespace Task_Manager
             Window TaskWindow = new TaskWindow();
             TaskWindow.Show();
             */
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        
+        }
+
+        private void AddTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

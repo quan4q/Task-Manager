@@ -23,5 +23,15 @@ namespace Task_Manager
         {
             InitializeComponent();
         }
+
+        private void SaveTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CancelTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
