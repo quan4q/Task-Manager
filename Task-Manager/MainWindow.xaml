@@ -60,10 +60,48 @@
         
         <!--Лист с задачами-->
         <GroupBox Header="Задачи" BorderThickness="3" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4" Margin="10,-10,10,10" Padding="10">
-            <!--TO DO: Заполнить шаблон ListView.ItemTemplate после добавления класса Task и коллекции для хранения-->
-            <ListView>
-                <!--ЗАГЛУШКА-->
-                <ListViewItem Content="Здесь будут отображаться задачи в виде списка - '| Название | Описание | Дедлайн | Кнопки для взаимодействия |'" Height="50"/>
+            <ListView x:Name="TasksList" ItemsSource="{Binding Tasks}" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="LightSlateGray" BorderThickness="2">
+                            <Grid>
+                                <!--Компановка элемента списка-->
+                                <!--NOTE: возможно в будущем будет меняться, потому что сейчас сделано не очень.-->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="130"/>
+                                    <ColumnDefinition Width="110"/>
+                                    <ColumnDefinition Width="757"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="70"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <!--Название задачи-->
+                                <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                                <!--Дедлайн задачи-->
+                                <TextBlock Text="{Binding Deadline, StringFormat={}{0:d.MM.yy HH:mm}}" Grid.Column="1" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                                <!--Описание задачи-->
+                                <TextBlock Text="{Binding Description}" Grid.Column="2" TextWrapping="Wrap" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                                <!--Категория задачи-->
+                                <TextBlock Text="{Binding Category}" Grid.Column="3" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                                <!--Приоритет задачи-->
+                                <TextBlock Text="{Binding Priority}" Grid.Column="4" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                                <!--Блок кнопок задачи-->
+                                <StackPanel Orientation="Horizontal" Grid.Column="5">
+                                    <!--Завершить задачу-->
+                                    <Button x:Name="CompleteButton" Content="✅" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <!--Удалить задачу-->
+                                    <Button x:Name="DeleteButton" Content="🗑️" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </GroupBox>
     </Grid>
