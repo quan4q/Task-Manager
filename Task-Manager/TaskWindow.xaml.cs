@@ -25,26 +25,15 @@ namespace Task_Manager
             InitializeComponent();
         }
 
-        public static int PriorityToInt(string priority)
-        {
-            switch (priority)
-            {
-                case "Низкий": return 0;
-                case "Средний": return 1;
-                case "Высокий": return 2;
-                default: return 0;
-            }
-        }
-
         private void SaveTaskButton_Click(object sender, RoutedEventArgs e)
         {
-            Task task = new Task
+            Task task = new()
             {
                 Title = TitleBox.Text,
                 Description = DescriptionBox.Text,
                 Deadline = DeadlineDTP.Value,
                 Category = CategoryBox.Text,
-                Priority = PriorityToInt(PriorityBox.Text),
+                Priority = PriorityBox.Text,
             };
             
             MainWindow.Tasks.Add(task);

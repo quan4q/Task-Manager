@@ -42,8 +42,10 @@
         <!--Приоритет-->
         <GroupBox Header="Приоритет" BorderThickness="3" Grid.Column="2" Margin="10,10,5,10" Padding="10">
             <ComboBox x:Name="PriorityBox" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                <ComboBoxItem Content="Убывание"/>
-                <ComboBoxItem Content="Возрастание"/>
+                <ComboBoxItem Content="Все"/>
+                <ComboBoxItem Content="Низкий"/>
+                <ComboBoxItem Content="Средний"/>
+                <ComboBoxItem Content="Высокий"/>
             </ComboBox>
         </GroupBox>
         
@@ -70,9 +72,9 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="130"/>
                                     <ColumnDefinition Width="110"/>
-                                    <ColumnDefinition Width="757"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="750"/>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="70"/>
                                     <ColumnDefinition Width="70"/>
                                 </Grid.ColumnDefinitions>
                                 

@@ -35,7 +35,7 @@ namespace Task_Manager
                 Description = "В 18:00 пара по программированию, нельзя пропускать!",
                 Deadline = new DateTime(2024, 05, 10, 18, 00, 00),
                 Category = "Учёба",
-                Priority = 2,
+                Priority = "Высокий",
                 IsCompleted = false
             };
 
@@ -46,7 +46,7 @@ namespace Task_Manager
                 Description = "Нужно встретиться в коворгинге на первом этаже и обсудить детали нашего проекта. ВАЖНО: сортировка, уведомления.",
                 Deadline = new DateTime(2024, 05, 5, 17, 00, 00),
                 Category = "Работа",
-                Priority = 2,
+                Priority = "Высокий",
                 IsCompleted = false
             };
 
@@ -57,7 +57,7 @@ namespace Task_Manager
                 Description = "Нашёл в интернете рецепт лазаньи. Говорят вкусная, надо попробовать её приготовить.",
                 Deadline = new DateTime(2024, 05, 6, 21, 30, 00),
                 Category = "Дом",
-                Priority = 1,
+                Priority = "Средний",
                 IsCompleted = false
             };
 
