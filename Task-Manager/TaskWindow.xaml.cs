@@ -36,7 +36,7 @@ namespace Task_Manager
                 Priority = PriorityBox.Text,
             };
             
-            MainWindow.Tasks.Add(task);
+            // MainWindow.Tasks.Add(task); Временно отключил, верну с новым методом.
 
             this.Close();
         }
