@@ -17,26 +17,37 @@ namespace Task_Manager
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Task> Tasks { get; set; }
-        public SQLDatabase Database = new();
+        public static ObservableCollection<Task> Tasks { get; set; }
+        public static SQLDatabase Database = new();
 
-        // NOTE: подумать над тем как будем обновлять ObservableCollection.
+        // NOTE: надо прочитать про кеширование в базах данных.
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        public void UpdateTasksList()
         {
             Tasks = Database.GetTasks();
             TasksList.ItemsSource = Tasks;
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateTasksList();
+        }
+
         private void AddTaskButton_Click(object sender, RoutedEventArgs e)
         {
             Window TaskWindow = new TaskWindow();
+            TaskWindow.Closed += TaskWindow_Closed;
             TaskWindow.ShowDialog();
+        }
+
+        private void TaskWindow_Closed(object sender, EventArgs e)
+        {
+            UpdateTasksList();
         }
     }
 }

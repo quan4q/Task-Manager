@@ -35,8 +35,8 @@ namespace Task_Manager
                 Category = CategoryBox.Text,
                 Priority = PriorityBox.Text,
             };
-            
-            // MainWindow.Tasks.Add(task); Временно отключил, верну с новым методом.
+
+            MainWindow.Database.AddTask(task); // Мне это явно не нравится.
 
             this.Close();
         }

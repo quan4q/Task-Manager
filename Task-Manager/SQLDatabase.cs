@@ -51,8 +51,24 @@ namespace Task_Manager
             return tasks;
         }
 
-        /* TO-DO: 
-            метод для добавления задачи, 
+        public void AddTask(Task task)
+        {
+            using SqliteConnection connection = new(connectionString);
+            connection.Open();
+
+            string formattedDeadline = task.Deadline.Value.ToString("yyyy-MM-dd HH:mm:ss");
+
+            using SqliteCommand command = new($@"INSERT INTO tasks (
+                                    Title, Description, Deadline,
+                                    Category, Priority, IsCompleted) VALUES (
+                                    '{task.Title}', '{task.Description}',
+                                    '{formattedDeadline}', '{task.Category}', '{task.Priority}',
+                                    '{task.IsCompleted}')", connection);
+
+            command.ExecuteNonQuery();
+        }
+
+        /* TO-DO:  
             метод для удаления задачи, 
             метод для обновления задачи,
             общий рефакторинг
