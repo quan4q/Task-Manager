@@ -55,7 +55,7 @@ namespace Task_Manager
                 Id = 3,
                 Title = "Приготовить еду на завтра",
                 Description = "Нашёл в интернете рецепт лазаньи. Говорят вкусная, надо попробовать её приготовить.",
-                Deadline = new DateTime(2024, 05, 6, 21, 30, 00),
+                Deadline = new DateTime(2025, 01, 1, 21, 30, 00),
                 Category = "Дом",
                 Priority = "Средний",
                 IsCompleted = false
@@ -70,6 +70,86 @@ namespace Task_Manager
         {
             Window TaskWindow = new TaskWindow();
             TaskWindow.ShowDialog();
+        }
+
+        public void UpdateTasksList()
+        {
+            ObservableCollection<Task> filteredTasks = new ObservableCollection<Task>();
+
+            filteredTasks = FilterByPriority(Tasks);
+            filteredTasks = FilterByCategory(filteredTasks);
+            filteredTasks = FilterByTime(filteredTasks);
+
+            TasksList.ItemsSource = filteredTasks;
+        }
+        //Применение фильтров к коллекции
+        public ObservableCollection<Task> FilterByPriority(ObservableCollection<Task> tasks)
+        {
+            ComboBoxItem cbi = (ComboBoxItem)PriorityBox.SelectedItem;
+            string filter = cbi.Content.ToString();
+
+            if (filter != "Все")
+            {
+                return new ObservableCollection<Task>(tasks.Where(t => t.Priority == filter).ToList()); //Почитать про Linq и лямбда функции в шарпах
+            }
+            else
+            {
+                return tasks;
+            }
+        }
+
+        public ObservableCollection<Task> FilterByCategory(ObservableCollection<Task> tasks)
+        {
+            ComboBoxItem cbi = (ComboBoxItem)CategoryBox.SelectedItem;
+            string filter = cbi.Content.ToString();
+
+            if (filter != "Все")
+            {
+                return new ObservableCollection<Task>(tasks.Where(t => t.Category == filter).ToList());
+            }
+            else
+            {
+                return tasks;
+            }
+        }
+        //ВАЖНО СДЕЛАТЬ ПРОВЕРКУ НА ДУРОЧКА В ДЕДЛАЙНЕ!!!
+        public ObservableCollection<Task> FilterByTime(ObservableCollection<Task> tasks)
+        {
+            ComboBoxItem cbi = (ComboBoxItem)Deadline.SelectedItem;
+            string filter = cbi.Content.ToString();
+
+            if (filter == "Скоро")
+            {
+                return new ObservableCollection<Task>(tasks.OrderBy(d => d.Deadline).ToList());
+            }
+            else
+            {
+                return new ObservableCollection<Task>(tasks.OrderByDescending(d => d.Deadline).ToList());
+            }
+        }
+        //Попробовать сделать лист не null, постоянные проверки это не красиво
+        private void PriorityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (TasksList != null)
+            {
+                UpdateTasksList();
+            }
+        }
+
+        private void CategoryBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (TasksList != null)
+            {
+                UpdateTasksList();
+            }
+        }
+
+        private void Deadline_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (TasksList != null)
+            {
+                UpdateTasksList();
+            }
         }
     }
 }
