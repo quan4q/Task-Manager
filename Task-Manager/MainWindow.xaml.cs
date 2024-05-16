@@ -74,15 +74,22 @@ namespace Task_Manager
 
         public void UpdateTasksList()
         {
+            TasksList.ItemsSource = FilterTasks();
+        }
+
+        //Применение фильтров к коллекции
+        public ObservableCollection<Task> FilterTasks()
+        {
             ObservableCollection<Task> filteredTasks = new ObservableCollection<Task>();
 
             filteredTasks = FilterByPriority(Tasks);
             filteredTasks = FilterByCategory(filteredTasks);
             filteredTasks = FilterByTime(filteredTasks);
+            filteredTasks = FilterByTitle(filteredTasks);
 
-            TasksList.ItemsSource = filteredTasks;
+            return filteredTasks;
         }
-        //Применение фильтров к коллекции
+
         public ObservableCollection<Task> FilterByPriority(ObservableCollection<Task> tasks)
         {
             ComboBoxItem cbi = (ComboBoxItem)PriorityBox.SelectedItem;
@@ -127,6 +134,19 @@ namespace Task_Manager
                 return new ObservableCollection<Task>(tasks.OrderByDescending(d => d.Deadline).ToList());
             }
         }
+
+        public ObservableCollection<Task> FilterByTitle(ObservableCollection<Task> tasks)
+        {
+            if(!string.IsNullOrEmpty(SearchBox.Text))
+            {
+                string substringToSearch = SearchBox.Text.ToLower();
+                return new ObservableCollection<Task>(tasks.Where(t => t.Title.ToLower().Contains(substringToSearch)).ToList());
+            }
+            else
+            {
+                return tasks;
+            }
+        }
         //Попробовать сделать лист не null, постоянные проверки это не красиво
         private void PriorityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -145,6 +165,14 @@ namespace Task_Manager
         }
 
         private void Deadline_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (TasksList != null)
+            {
+                UpdateTasksList();
+            }
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (TasksList != null)
             {
