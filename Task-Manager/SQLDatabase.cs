@@ -11,6 +11,8 @@ namespace Task_Manager
     public class SQLDatabase
     {
         private readonly string connectionString = "Data Source=usertasks.db";
+        private readonly ObservableCollection<Task> cashedTasks = [];
+        private bool isCashed = false;
 
         public SQLDatabase()
         {
@@ -26,29 +28,11 @@ namespace Task_Manager
 
         public ObservableCollection<Task> GetTasks()
         {
-            using SqliteConnection connection = new(connectionString);
-            connection.Open();
+            if (isCashed) { return cashedTasks; }
+            
+            UpdateCache();
 
-            using SqliteCommand command = new("SELECT * FROM tasks", connection);
-            using SqliteDataReader reader = command.ExecuteReader();
-
-            ObservableCollection<Task> tasks = [];
-
-            while (reader.Read())
-            {
-                tasks.Add(new Task()
-                {
-                    Id = reader.GetInt32(0),
-                    Title = reader.GetString(1),
-                    Description = reader.GetString(2),
-                    Deadline = reader.GetDateTime(3),
-                    Category = reader.GetString(4),
-                    Priority = reader.GetString(5),
-                    IsCompleted = reader.GetBoolean(6),
-                });
-            }
-
-            return tasks;
+            return cashedTasks;
         }
 
         public void AddTask(Task task)
@@ -66,6 +50,7 @@ namespace Task_Manager
                                     '{task.IsCompleted}')", connection);
 
             command.ExecuteNonQuery();
+            isCashed = false;
         }
 
         public void DeleteTask(int taskId)
@@ -75,6 +60,7 @@ namespace Task_Manager
 
             using SqliteCommand command = new($"DELETE FROM tasks WHERE Id='{taskId}'", connection);
             command.ExecuteNonQuery();
+            isCashed = false;
         }
 
         public void UpdateTask(Task task)
@@ -91,6 +77,34 @@ namespace Task_Manager
                                                 WHERE Id='{task.Id}'", connection);
 
             command.ExecuteNonQuery();
+            isCashed = false;
+        }
+
+        private void UpdateCache() 
+        {
+            using SqliteConnection connection = new(connectionString);
+            connection.Open();
+
+            using SqliteCommand command = new("SELECT * FROM tasks", connection);
+            using SqliteDataReader reader = command.ExecuteReader();
+
+            cashedTasks.Clear();
+
+            while (reader.Read())
+            {
+                cashedTasks.Add(new Task()
+                {
+                    Id = reader.GetInt32(0),
+                    Title = reader.GetString(1),
+                    Description = reader.GetString(2),
+                    Deadline = reader.GetDateTime(3),
+                    Category = reader.GetString(4),
+                    Priority = reader.GetString(5),
+                    IsCompleted = reader.GetBoolean(6),
+                });
+            }
+
+            isCashed = true;
         }
 
         /* TO-DO:
