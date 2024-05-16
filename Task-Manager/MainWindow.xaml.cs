@@ -17,19 +17,16 @@ namespace Task_Manager
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static ObservableCollection<Task> Tasks { get; set; }
-        public static SQLDatabase Database = new();
-
-        // NOTE: надо прочитать про кеширование в базах данных.
+        private ObservableCollection<Task> Tasks; 
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        public void UpdateTasksList()
+        private void UpdateTasksList()
         {
-            Tasks = Database.GetTasks();
+            Tasks = App.Database.GetTasks();
             TasksList.ItemsSource = Tasks;
         }
 

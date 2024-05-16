@@ -5,19 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
-
+    
 namespace Task_Manager
 {
     public class SQLDatabase
     {
         private readonly string connectionString = "Data Source=usertasks.db";
-        private readonly ObservableCollection<Task> cashedTasks = [];
+        private readonly ObservableCollection<Task> cashedTasks = new();
         private bool isCashed = false;
 
-        public SQLDatabase()
+        public SQLDatabase() { InitializeDatabase(); }
+
+        private SqliteConnection GetConnection()
         {
-            using SqliteConnection connection = new(connectionString);
+            SqliteConnection connection = new(connectionString);
             connection.Open();
+            return connection;
+        }
+
+        private void InitializeDatabase()
+        {
+            using SqliteConnection connection = GetConnection();
 
             SqliteCommand command = new(@"CREATE TABLE IF NOT EXISTS tasks (
                                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,9 +45,7 @@ namespace Task_Manager
 
         public void AddTask(Task task)
         {
-            using SqliteConnection connection = new(connectionString);
-            connection.Open();
-
+            using SqliteConnection connection = GetConnection();
             string formattedDeadline = task.Deadline.Value.ToString("yyyy-MM-dd HH:mm:ss");
 
             using SqliteCommand command = new($@"INSERT INTO tasks (
@@ -55,9 +61,7 @@ namespace Task_Manager
 
         public void DeleteTask(int taskId)
         {
-            using SqliteConnection connection = new(connectionString);
-            connection.Open();
-
+            using SqliteConnection connection = GetConnection();
             using SqliteCommand command = new($"DELETE FROM tasks WHERE Id='{taskId}'", connection);
             command.ExecuteNonQuery();
             isCashed = false;
@@ -65,9 +69,7 @@ namespace Task_Manager
 
         public void UpdateTask(Task task)
         {
-            using SqliteConnection connection = new(connectionString);
-            connection.Open();
-
+            using SqliteConnection connection = GetConnection();
             string formattedDeadline = task.Deadline.Value.ToString("yyyy-MM-dd HH:mm:ss");
 
             using SqliteCommand command = new($@"UPDATE tasks SET
@@ -82,8 +84,7 @@ namespace Task_Manager
 
         private void UpdateCache() 
         {
-            using SqliteConnection connection = new(connectionString);
-            connection.Open();
+            using SqliteConnection connection = GetConnection();
 
             using SqliteCommand command = new("SELECT * FROM tasks", connection);
             using SqliteDataReader reader = command.ExecuteReader();
@@ -106,9 +107,5 @@ namespace Task_Manager
 
             isCashed = true;
         }
-
-        /* TO-DO:
-            общий рефакторинг
-        */
     }
 }

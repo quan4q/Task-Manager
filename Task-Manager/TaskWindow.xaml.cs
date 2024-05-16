@@ -36,7 +36,7 @@ namespace Task_Manager
                 Priority = PriorityBox.Text,
             };
 
-            MainWindow.Database.AddTask(task); // Мне это явно не нравится.
+            App.Database.AddTask(task);
 
             this.Close();
         }
