@@ -25,7 +25,7 @@
         
         <!--Поиск-->
         <GroupBox Header="Поиск" BorderThickness="3" Margin="10,10,5,10" Padding="10">
-            <TextBox x:Name="SearchBox" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="SearchBox" VerticalContentAlignment="Center" TextChanged="SearchBox_TextChanged"/>
         </GroupBox>
         
         <!--Категории-->
