@@ -68,9 +68,32 @@ namespace Task_Manager
             command.ExecuteNonQuery();
         }
 
-        /* TO-DO:  
-            метод для удаления задачи, 
-            метод для обновления задачи,
+        public void DeleteTask(int taskId)
+        {
+            using SqliteConnection connection = new(connectionString);
+            connection.Open();
+
+            using SqliteCommand command = new($"DELETE FROM tasks WHERE Id='{taskId}'", connection);
+            command.ExecuteNonQuery();
+        }
+
+        public void UpdateTask(Task task)
+        {
+            using SqliteConnection connection = new(connectionString);
+            connection.Open();
+
+            string formattedDeadline = task.Deadline.Value.ToString("yyyy-MM-dd HH:mm:ss");
+
+            using SqliteCommand command = new($@"UPDATE tasks SET
+                                                Title='{task.Title}', Description='{task.Description}',
+                                                Deadline='{formattedDeadline}', Category='{task.Category}',
+                                                Priority='{task.Priority}', IsCompleted='{task.IsCompleted}'
+                                                WHERE Id='{task.Id}'", connection);
+
+            command.ExecuteNonQuery();
+        }
+
+        /* TO-DO:
             общий рефакторинг
         */
     }
