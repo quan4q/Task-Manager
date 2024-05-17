@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task_Manager"
         mc:Ignorable="d"
-        Title="Task Manager" Height="720" Width="1280" ResizeMode="CanMinimize" FontSize="14" Loaded="Window_Loaded">
+        Title="Task Manager" Height="720" Width="1280" ResizeMode="CanMinimize" FontSize="14">
     <Grid>
         <!--Компановка главного окна-->
         <Grid.ColumnDefinitions>
@@ -62,7 +62,7 @@
         
         <!--Лист с задачами-->
         <GroupBox Header="Задачи" BorderThickness="3" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4" Margin="10,-10,10,10" Padding="10">
-            <ListView x:Name="TasksList" ItemsSource="{Binding Tasks}" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <ListView x:Name="TasksList" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="LightSlateGray" BorderThickness="2">

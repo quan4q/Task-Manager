@@ -35,8 +35,8 @@ namespace Task_Manager
                 Category = CategoryBox.Text,
                 Priority = PriorityBox.Text,
             };
-            
-            MainWindow.Tasks.Add(task);
+
+            App.Database.AddTask(task);
 
             this.Close();
         }
