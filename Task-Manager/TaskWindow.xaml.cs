@@ -27,6 +27,19 @@ namespace Task_Manager
 
         private void SaveTaskButton_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(TitleBox.Text) || string.IsNullOrWhiteSpace(CategoryBox.Text) ||
+                string.IsNullOrWhiteSpace(PriorityBox.Text) || DeadlineDTP == null)
+            {
+                MessageBox.Show("ОШИБКА! Пожалуйста, заполните все необходимые поля.");
+                return;
+            }
+
+            if (DeadlineDTP.Value < DateTime.Now)
+            {
+                MessageBox.Show("ОШИБКА! Дедлайн не может быть раньше текущий даты.");
+                return;
+            }
+
             Task task = new()
             {
                 Title = TitleBox.Text,
