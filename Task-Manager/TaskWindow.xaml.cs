@@ -20,9 +20,28 @@ namespace Task_Manager
     /// </summary>
     public partial class TaskWindow : Window
     {
+        private bool IsRedacted;
+        private Task RedactedTask;
+
         public TaskWindow()
         {
             InitializeComponent();
+
+            IsRedacted = false;
+        }
+
+        public TaskWindow(Task task)
+        {
+            InitializeComponent();
+
+            TitleBox.Text = task.Title;
+            DescriptionBox.Text = task.Description;
+            DeadlineDTP.Value = task.Deadline;
+            CategoryBox.Text = task.Category;
+            PriorityBox.Text = task.Priority;
+
+            IsRedacted = true;
+            RedactedTask = task;
         }
 
         private void SaveTaskButton_Click(object sender, RoutedEventArgs e)
@@ -40,16 +59,29 @@ namespace Task_Manager
                 return;
             }
 
-            Task task = new()
+            if (!IsRedacted)
             {
-                Title = TitleBox.Text,
-                Description = DescriptionBox.Text,
-                Deadline = DeadlineDTP.Value,
-                Category = CategoryBox.Text,
-                Priority = PriorityBox.Text,
-            };
+                Task task = new()
+                {
+                    Title = TitleBox.Text,
+                    Description = DescriptionBox.Text,
+                    Deadline = DeadlineDTP.Value,
+                    Category = CategoryBox.Text,
+                    Priority = PriorityBox.Text,
+                };
 
-            App.Database.AddTask(task);
+                App.Database.AddTask(task);
+            }
+            else
+            {
+                RedactedTask.Title = TitleBox.Text;
+                RedactedTask.Description = DescriptionBox.Text;
+                RedactedTask.Deadline = DeadlineDTP.Value;
+                RedactedTask.Category = CategoryBox.Text;
+                RedactedTask.Priority = PriorityBox.Text;
+
+                App.Database.UpdateTask(RedactedTask);
+            }
 
             this.Close();
         }

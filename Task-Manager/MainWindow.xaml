@@ -62,7 +62,7 @@
         
         <!--Лист с задачами-->
         <GroupBox Header="Задачи" BorderThickness="3" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4" Margin="10,-10,10,10" Padding="10">
-            <ListView x:Name="TasksList" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <ListView x:Name="TasksList" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" MouseDoubleClick="TasksList_MouseDoubleClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="LightSlateGray" BorderThickness="2">

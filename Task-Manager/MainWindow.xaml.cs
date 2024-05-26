@@ -177,5 +177,19 @@ namespace Task_Manager
 
             UpdateTasksList();
         }
+
+        private void TasksList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Task selectedTask = TasksList.SelectedItem as Task;
+
+            if(TasksList.SelectedItem != null)
+            {
+                Window TaskWindow = new TaskWindow(selectedTask);
+                TaskWindow.Closed += TaskWindow_Closed;
+                TaskWindow.ShowDialog();
+
+
+            }
+        }
     }
 }
