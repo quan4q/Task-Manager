@@ -96,9 +96,9 @@
                                 <!--Блок кнопок задачи-->
                                 <StackPanel Orientation="Horizontal" Grid.Column="5">
                                     <!--Завершить задачу-->
-                                    <Button x:Name="CompleteButton" Content="✅" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button x:Name="CompleteButton" Content="✅" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CompleteButton_Click"/>
                                     <!--Удалить задачу-->
-                                    <Button x:Name="DeleteButton" Content="🗑️" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Button x:Name="DeleteButton" Content="🗑️" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DeleteButton_Click"/>
                                 </StackPanel>
                             </Grid>
                         </Border>

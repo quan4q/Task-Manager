@@ -53,7 +53,7 @@ namespace Task_Manager
                                     Category, Priority, IsCompleted) VALUES (
                                     '{task.Title}', '{task.Description}',
                                     '{formattedDeadline}', '{task.Category}', '{task.Priority}',
-                                    '{task.IsCompleted}')", connection);
+                                    {task.IsCompleted})", connection);
 
             command.ExecuteNonQuery();
             isCashed = false;
@@ -75,7 +75,7 @@ namespace Task_Manager
             using SqliteCommand command = new($@"UPDATE tasks SET
                                                 Title='{task.Title}', Description='{task.Description}',
                                                 Deadline='{formattedDeadline}', Category='{task.Category}',
-                                                Priority='{task.Priority}', IsCompleted='{task.IsCompleted}'
+                                                Priority='{task.Priority}', IsCompleted={task.IsCompleted}
                                                 WHERE Id='{task.Id}'", connection);
 
             command.ExecuteNonQuery();

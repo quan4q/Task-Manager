@@ -15,6 +15,5 @@ namespace Task_Manager
         public string Category { get; set; }
         public string Priority { get; set; }
         public bool IsCompleted { get; set; }
-
     }
 }

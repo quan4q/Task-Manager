@@ -71,16 +71,20 @@ namespace Task_Manager
             ComboBoxItem cbi = (ComboBoxItem)CategoryBox.SelectedItem;
             string filter = cbi.Content.ToString();
 
-            if (filter != "Все")
+            if (filter != "Все" && filter != "Архив")
             {
-                return new ObservableCollection<Task>(tasks.Where(t => t.Category == filter).ToList());
+                return new ObservableCollection<Task>(tasks.Where(t => (t.Category == filter) && (t.IsCompleted == false)).ToList());
+            }
+            else if (filter == "Архив")
+            {
+                return new ObservableCollection<Task>(tasks.Where(t => t.IsCompleted == true).ToList());
             }
             else
             {
-                return tasks;
+                return new ObservableCollection<Task>(tasks.Where(t => t.IsCompleted == false).ToList());
             }
         }
-        //ВАЖНО СДЕЛАТЬ ПРОВЕРКУ НА ДУРОЧКА В ДЕДЛАЙНЕ!!!
+
         public ObservableCollection<Task> FilterByTime(ObservableCollection<Task> tasks)
         {
             ComboBoxItem cbi = (ComboBoxItem)Deadline.SelectedItem;
@@ -143,6 +147,34 @@ namespace Task_Manager
 
         private void TaskWindow_Closed(object sender, EventArgs e)
         {
+            UpdateTasksList();
+        }
+
+        private void CompleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Task selectedTask = button.DataContext as Task;
+
+            if (selectedTask.IsCompleted == false)
+            {
+                selectedTask.IsCompleted = true;
+            }
+            else
+            {
+                selectedTask.IsCompleted = false;
+            }
+
+            App.Database.UpdateTask(selectedTask);
+            UpdateTasksList();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Task selectedTask = button.DataContext as Task;
+
+            App.Database.DeleteTask(selectedTask.Id);
+
             UpdateTasksList();
         }
     }
