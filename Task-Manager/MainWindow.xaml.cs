@@ -9,6 +9,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using Notification.Wpf;
 
 namespace Task_Manager
 {
@@ -17,7 +19,8 @@ namespace Task_Manager
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<Task> Tasks; 
+        private ObservableCollection<Task> Tasks;
+        private readonly Notificator DeadlineNotificator = new();
 
         public MainWindow()
         {
@@ -187,8 +190,6 @@ namespace Task_Manager
                 Window TaskWindow = new TaskWindow(selectedTask);
                 TaskWindow.Closed += TaskWindow_Closed;
                 TaskWindow.ShowDialog();
-
-
             }
         }
     }
