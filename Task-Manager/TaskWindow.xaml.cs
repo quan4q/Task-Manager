@@ -34,14 +34,19 @@ namespace Task_Manager
         {
             InitializeComponent();
 
+            FillTaskWindow(task);
+
+            IsRedacted = true;
+            RedactedTask = task;
+        }
+
+        public void FillTaskWindow(Task task)
+        {
             TitleBox.Text = task.Title;
             DescriptionBox.Text = task.Description;
             DeadlineDTP.Value = task.Deadline;
             CategoryBox.Text = task.Category;
             PriorityBox.Text = task.Priority;
-
-            IsRedacted = true;
-            RedactedTask = task;
         }
 
         private void SaveTaskButton_Click(object sender, RoutedEventArgs e)

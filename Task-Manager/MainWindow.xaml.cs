@@ -56,12 +56,12 @@ namespace Task_Manager
 
         public ObservableCollection<Task> FilterByPriority(ObservableCollection<Task> tasks)
         {
-            ComboBoxItem cbi = (ComboBoxItem)PriorityBox.SelectedItem;
-            string filter = cbi.Content.ToString();
+            ComboBoxItem selectedPriority = (ComboBoxItem)PriorityBox.SelectedItem;
+            string priorityFilter = selectedPriority.Content.ToString();
 
-            if (filter != "Все")
+            if (priorityFilter != "Все")
             {
-                return new ObservableCollection<Task>(tasks.Where(t => t.Priority == filter).ToList()); //Почитать про Linq и лямбда функции в шарпах
+                return new ObservableCollection<Task>(tasks.Where(t => t.Priority == priorityFilter).ToList());
             }
             else
             {
@@ -71,14 +71,14 @@ namespace Task_Manager
 
         public ObservableCollection<Task> FilterByCategory(ObservableCollection<Task> tasks)
         {
-            ComboBoxItem cbi = (ComboBoxItem)CategoryBox.SelectedItem;
-            string filter = cbi.Content.ToString();
+            ComboBoxItem selectedCategory = (ComboBoxItem)CategoryBox.SelectedItem;
+            string categoryFilter = selectedCategory.Content.ToString();
 
-            if (filter != "Все" && filter != "Архив")
+            if (categoryFilter != "Все" && categoryFilter != "Архив")
             {
-                return new ObservableCollection<Task>(tasks.Where(t => (t.Category == filter) && (t.IsCompleted == false)).ToList());
+                return new ObservableCollection<Task>(tasks.Where(t => (t.Category == categoryFilter) && (t.IsCompleted == false)).ToList());
             }
-            else if (filter == "Архив")
+            else if (categoryFilter == "Архив")
             {
                 return new ObservableCollection<Task>(tasks.Where(t => t.IsCompleted == true).ToList());
             }
@@ -90,16 +90,16 @@ namespace Task_Manager
 
         public ObservableCollection<Task> FilterByTime(ObservableCollection<Task> tasks)
         {
-            ComboBoxItem cbi = (ComboBoxItem)Deadline.SelectedItem;
-            string filter = cbi.Content.ToString();
+            ComboBoxItem selectedSort = (ComboBoxItem)Deadline.SelectedItem;
+            string deadlineFilter = selectedSort.Content.ToString();
 
-            if (filter == "Скоро")
+            if (deadlineFilter == "Скоро")
             {
-                return new ObservableCollection<Task>(tasks.OrderBy(d => d.Deadline).ToList());
+                return new ObservableCollection<Task>(tasks.OrderBy(t => t.Deadline).ToList());
             }
             else
             {
-                return new ObservableCollection<Task>(tasks.OrderByDescending(d => d.Deadline).ToList());
+                return new ObservableCollection<Task>(tasks.OrderByDescending(t => t.Deadline).ToList());
             }
         }
 
