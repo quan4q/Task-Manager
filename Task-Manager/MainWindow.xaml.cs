@@ -176,9 +176,14 @@ namespace Task_Manager
             Button button = sender as Button;
             Task selectedTask = button.DataContext as Task;
 
-            App.Database.DeleteTask(selectedTask.Id);
+            MessageBoxResult messageBoxAnswer = MessageBox.Show("Вы действительно хотите удалить задачу?", "Подтверждение удаления",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            UpdateTasksList();
+            if (messageBoxAnswer == MessageBoxResult.Yes)
+            {
+                App.Database.DeleteTask(selectedTask.Id);
+                UpdateTasksList();
+            }
         }
 
         private void TasksList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
