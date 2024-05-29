@@ -13,7 +13,7 @@ namespace Task_Manager
     {
         private readonly DispatcherTimer DeadineTimer = new();
         private readonly NotificationManager NotificationManager = new();
-        private readonly Dictionary<TimeSpan, string> notifications = new()
+        private readonly Dictionary<TimeSpan, string> Notifications = new()
         {
             { new TimeSpan(0, 59, 0), "Остался 1 час!" },
             { new TimeSpan(2, 59, 0), "Осталось 3 часа!" },
@@ -44,19 +44,22 @@ namespace Task_Manager
 
         private void DeadineTimer_Tick(object? sender, EventArgs e)
         {
-            ObservableCollection<Task> tasksList = App.Database.GetTasks();
+            List<Task> tasksList = App.Database.GetTasks();
 
             foreach (Task task in tasksList)
             {
-                TimeSpan remainingTime = (TimeSpan)(task.Deadline - DateTime.Now);
-                
-                foreach (KeyValuePair<TimeSpan, string> notification in notifications)
+                if (task.IsCompleted == false)
                 {
-                    if (remainingTime.Days == notification.Key.Days &&
-                        remainingTime.Hours == notification.Key.Hours &&
-                        remainingTime.Minutes == notification.Key.Minutes)
+                    TimeSpan remainingTime = (TimeSpan)(task.Deadline - DateTime.Now);
+
+                    foreach (KeyValuePair<TimeSpan, string> notification in Notifications)
                     {
-                        ShowNotification(task.Title, notification.Value);
+                        if (remainingTime.Days == notification.Key.Days &&
+                            remainingTime.Hours == notification.Key.Hours &&
+                            remainingTime.Minutes == notification.Key.Minutes)
+                        {
+                            ShowNotification(task.Title, notification.Value);
+                        }
                     }
                 }
             }

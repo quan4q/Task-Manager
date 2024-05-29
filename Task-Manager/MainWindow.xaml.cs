@@ -19,8 +19,7 @@ namespace Task_Manager
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<Task> Tasks;
-        private readonly Notificator DeadlineNotificator = new();
+        private List<Task> Tasks;
 
         public MainWindow()
         {
@@ -42,9 +41,9 @@ namespace Task_Manager
         }
 
         //Применение фильтров к коллекции
-        public ObservableCollection<Task> FilterTasks()
+        public List<Task> FilterTasks()
         {
-            ObservableCollection<Task> filteredTasks = new ObservableCollection<Task>();
+            List<Task> filteredTasks = [];
 
             filteredTasks = FilterByPriority(Tasks);
             filteredTasks = FilterByCategory(filteredTasks);
@@ -54,14 +53,14 @@ namespace Task_Manager
             return filteredTasks;
         }
 
-        public ObservableCollection<Task> FilterByPriority(ObservableCollection<Task> tasks)
+        public List<Task> FilterByPriority(List<Task> tasks)
         {
             ComboBoxItem selectedPriority = (ComboBoxItem)PriorityBox.SelectedItem;
             string priorityFilter = selectedPriority.Content.ToString();
 
             if (priorityFilter != "Все")
             {
-                return new ObservableCollection<Task>(tasks.Where(t => t.Priority == priorityFilter).ToList());
+                return new List<Task>(tasks.Where(t => t.Priority == priorityFilter).ToList());
             }
             else
             {
@@ -69,46 +68,46 @@ namespace Task_Manager
             }
         }
 
-        public ObservableCollection<Task> FilterByCategory(ObservableCollection<Task> tasks)
+        public List<Task> FilterByCategory(List<Task> tasks)
         {
             ComboBoxItem selectedCategory = (ComboBoxItem)CategoryBox.SelectedItem;
             string categoryFilter = selectedCategory.Content.ToString();
 
             if (categoryFilter != "Все" && categoryFilter != "Архив")
             {
-                return new ObservableCollection<Task>(tasks.Where(t => (t.Category == categoryFilter) && (t.IsCompleted == false)).ToList());
+                return new List<Task>(tasks.Where(t => (t.Category == categoryFilter) && (t.IsCompleted == false)).ToList());
             }
             else if (categoryFilter == "Архив")
             {
-                return new ObservableCollection<Task>(tasks.Where(t => t.IsCompleted == true).ToList());
+                return new List<Task>(tasks.Where(t => t.IsCompleted == true).ToList());
             }
             else
             {
-                return new ObservableCollection<Task>(tasks.Where(t => t.IsCompleted == false).ToList());
+                return new List<Task>(tasks.Where(t => t.IsCompleted == false).ToList());
             }
         }
 
-        public ObservableCollection<Task> FilterByTime(ObservableCollection<Task> tasks)
+        public List<Task> FilterByTime(List<Task> tasks)
         {
             ComboBoxItem selectedSort = (ComboBoxItem)Deadline.SelectedItem;
             string deadlineFilter = selectedSort.Content.ToString();
 
             if (deadlineFilter == "Скоро")
             {
-                return new ObservableCollection<Task>(tasks.OrderBy(t => t.Deadline).ToList());
+                return new List<Task>(tasks.OrderBy(t => t.Deadline).ToList());
             }
             else
             {
-                return new ObservableCollection<Task>(tasks.OrderByDescending(t => t.Deadline).ToList());
+                return new List<Task>(tasks.OrderByDescending(t => t.Deadline).ToList());
             }
         }
 
-        public ObservableCollection<Task> FilterByTitle(ObservableCollection<Task> tasks)
+        public List<Task> FilterByTitle(List<Task> tasks)
         {
-            if(!string.IsNullOrEmpty(SearchBox.Text))
+            if (!string.IsNullOrEmpty(SearchBox.Text))
             {
                 string substringToSearch = SearchBox.Text.ToLower();
-                return new ObservableCollection<Task>(tasks.Where(t => t.Title.ToLower().Contains(substringToSearch)).ToList());
+                return new List<Task>(tasks.Where(t => t.Title.ToLower().Contains(substringToSearch)).ToList());
             }
             else
             {
@@ -148,7 +147,7 @@ namespace Task_Manager
             }
         }
 
-        private void TaskWindow_Closed(object sender, EventArgs e)
+        private void TaskWindow_Closed(object? sender, EventArgs e)
         {
             UpdateTasksList();
         }
@@ -190,7 +189,7 @@ namespace Task_Manager
         {
             Task selectedTask = TasksList.SelectedItem as Task;
 
-            if(TasksList.SelectedItem != null)
+            if (TasksList.SelectedItem != null)
             {
                 Window TaskWindow = new TaskWindow(selectedTask);
                 TaskWindow.Closed += TaskWindow_Closed;

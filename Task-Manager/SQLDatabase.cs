@@ -10,15 +10,18 @@ namespace Task_Manager
 {
     public class SQLDatabase
     {
-        private readonly string connectionString = "Data Source=usertasks.db";
-        private readonly ObservableCollection<Task> cashedTasks = new();
-        private bool isCashed = false;
+        private readonly string ConnectionString = "Data Source=usertasks.db";
+        private readonly List<Task> CachedTasks = [];
+        private bool IsCached = false;
 
-        public SQLDatabase() { InitializeDatabase(); }
+        public SQLDatabase() 
+        {
+            InitializeDatabase();
+        }
 
         private SqliteConnection GetConnection()
         {
-            SqliteConnection connection = new(connectionString);
+            SqliteConnection connection = new(ConnectionString);
             connection.Open();
             return connection;
         }
@@ -34,13 +37,16 @@ namespace Task_Manager
             command.ExecuteNonQuery();
         }
 
-        public ObservableCollection<Task> GetTasks()
+        public List<Task> GetTasks()
         {
-            if (isCashed) { return cashedTasks; }
+            if (IsCached) 
+            {
+                return CachedTasks;
+            }
             
             UpdateCache();
 
-            return cashedTasks;
+            return CachedTasks;
         }
 
         public void AddTask(Task task)
@@ -49,22 +55,23 @@ namespace Task_Manager
             string formattedDeadline = task.Deadline.Value.ToString("yyyy-MM-dd HH:mm:ss");
 
             using SqliteCommand command = new($@"INSERT INTO tasks (
-                                    Title, Description, Deadline,
-                                    Category, Priority, IsCompleted) VALUES (
-                                    '{task.Title}', '{task.Description}',
-                                    '{formattedDeadline}', '{task.Category}', '{task.Priority}',
-                                    {task.IsCompleted})", connection);
+                                                Title, Description, Deadline, Category,
+                                                Priority, IsCompleted) VALUES (
+                                                '{task.Title}', '{task.Description}',
+                                                '{formattedDeadline}', '{task.Category}', '{task.Priority}',
+                                                {task.IsCompleted})", connection);
 
             command.ExecuteNonQuery();
-            isCashed = false;
+            IsCached = false;
         }
 
         public void DeleteTask(int taskId)
         {
             using SqliteConnection connection = GetConnection();
-            using SqliteCommand command = new($"DELETE FROM tasks WHERE Id='{taskId}'", connection);
+            using SqliteCommand command = new($"DELETE FROM tasks WHERE Id={taskId}", connection);
+
             command.ExecuteNonQuery();
-            isCashed = false;
+            IsCached = false;
         }
 
         public void UpdateTask(Task task)
@@ -76,10 +83,10 @@ namespace Task_Manager
                                                 Title='{task.Title}', Description='{task.Description}',
                                                 Deadline='{formattedDeadline}', Category='{task.Category}',
                                                 Priority='{task.Priority}', IsCompleted={task.IsCompleted}
-                                                WHERE Id='{task.Id}'", connection);
+                                                WHERE Id={task.Id}", connection);
 
             command.ExecuteNonQuery();
-            isCashed = false;
+            IsCached = false;
         }
 
         private void UpdateCache() 
@@ -89,11 +96,11 @@ namespace Task_Manager
             using SqliteCommand command = new("SELECT * FROM tasks", connection);
             using SqliteDataReader reader = command.ExecuteReader();
 
-            cashedTasks.Clear();
+            CachedTasks.Clear();
 
             while (reader.Read())
             {
-                cashedTasks.Add(new Task()
+                CachedTasks.Add(new Task()
                 {
                     Id = reader.GetInt32(0),
                     Title = reader.GetString(1),
@@ -105,7 +112,7 @@ namespace Task_Manager
                 });
             }
 
-            isCashed = true;
+            IsCached = true;
         }
     }
 }

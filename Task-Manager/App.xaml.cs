@@ -11,5 +11,6 @@ namespace Task_Manager
     public partial class App : Application
     {
         public static SQLDatabase Database { get; } = new();
+        public static Notificator Notificator { get; } = new();
     }
 }
