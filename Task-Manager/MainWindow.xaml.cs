@@ -43,9 +43,9 @@ namespace Task_Manager
         //Применение фильтров к коллекции
         public List<Task> FilterTasks()
         {
-            List<Task> filteredTasks = [];
+            List<Task> filteredTasks = Tasks;
 
-            filteredTasks = FilterByPriority(Tasks);
+            filteredTasks = FilterByPriority(filteredTasks);
             filteredTasks = FilterByCategory(filteredTasks);
             filteredTasks = FilterByTime(filteredTasks);
             filteredTasks = FilterBySearch(filteredTasks);
@@ -60,7 +60,7 @@ namespace Task_Manager
 
             if (priorityFilter != "Все")
             {
-                return new List<Task>(tasks.Where(task => task.Priority == priorityFilter).ToList());
+                return tasks.Where(task => task.Priority == priorityFilter).ToList();
             }
             else
             {
@@ -75,15 +75,15 @@ namespace Task_Manager
 
             if (categoryFilter != "Все" && categoryFilter != "Архив")
             {
-                return new List<Task>(tasks.Where(task => (task.Category == categoryFilter) && (task.IsCompleted == false)).ToList());
+                return tasks.Where(task => (task.Category == categoryFilter) && (task.IsCompleted == false)).ToList();
             }
             else if (categoryFilter == "Архив")
             {
-                return new List<Task>(tasks.Where(task => task.IsCompleted == true).ToList());
+                return tasks.Where(task => task.IsCompleted == true).ToList();
             }
             else
             {
-                return new List<Task>(tasks.Where(task => task.IsCompleted == false).ToList());
+                return tasks.Where(task => task.IsCompleted == false).ToList();
             }
         }
 
@@ -94,11 +94,11 @@ namespace Task_Manager
 
             if (deadlineFilter == "Скоро")
             {
-                return new List<Task>(tasks.OrderBy(task => task.Deadline).ToList());
+                return tasks.OrderBy(task => task.Deadline).ToList();
             }
             else
             {
-                return new List<Task>(tasks.OrderByDescending(task => task.Deadline).ToList());
+                return tasks.OrderByDescending(task => task.Deadline).ToList();
             }
         }
 
@@ -107,8 +107,8 @@ namespace Task_Manager
             if (!string.IsNullOrEmpty(SearchBox.Text))
             {
                 string substringToSearch = SearchBox.Text.ToLower();
-                return new List<Task>(tasks.Where(task => task.Title.ToLower().Contains(substringToSearch) ||
-                task.Description.ToLower().Contains(substringToSearch)).ToList());
+                return tasks.Where(task => task.Title.ToLower().Contains(substringToSearch) || 
+                                    task.Description.ToLower().Contains(substringToSearch)).ToList();
             }
             else
             {
