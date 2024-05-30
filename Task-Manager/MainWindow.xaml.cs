@@ -60,7 +60,7 @@ namespace Task_Manager
 
             if (priorityFilter != "Все")
             {
-                return new List<Task>(tasks.Where(t => t.Priority == priorityFilter).ToList());
+                return new List<Task>(tasks.Where(task => task.Priority == priorityFilter).ToList());
             }
             else
             {
@@ -75,15 +75,15 @@ namespace Task_Manager
 
             if (categoryFilter != "Все" && categoryFilter != "Архив")
             {
-                return new List<Task>(tasks.Where(t => (t.Category == categoryFilter) && (t.IsCompleted == false)).ToList());
+                return new List<Task>(tasks.Where(task => (task.Category == categoryFilter) && (task.IsCompleted == false)).ToList());
             }
             else if (categoryFilter == "Архив")
             {
-                return new List<Task>(tasks.Where(t => t.IsCompleted == true).ToList());
+                return new List<Task>(tasks.Where(task => task.IsCompleted == true).ToList());
             }
             else
             {
-                return new List<Task>(tasks.Where(t => t.IsCompleted == false).ToList());
+                return new List<Task>(tasks.Where(task => task.IsCompleted == false).ToList());
             }
         }
 
@@ -94,11 +94,11 @@ namespace Task_Manager
 
             if (deadlineFilter == "Скоро")
             {
-                return new List<Task>(tasks.OrderBy(t => t.Deadline).ToList());
+                return new List<Task>(tasks.OrderBy(task => task.Deadline).ToList());
             }
             else
             {
-                return new List<Task>(tasks.OrderByDescending(t => t.Deadline).ToList());
+                return new List<Task>(tasks.OrderByDescending(task => task.Deadline).ToList());
             }
         }
 
@@ -107,7 +107,7 @@ namespace Task_Manager
             if (!string.IsNullOrEmpty(SearchBox.Text))
             {
                 string substringToSearch = SearchBox.Text.ToLower();
-                return new List<Task>(tasks.Where(t => t.Title.ToLower().Contains(substringToSearch)).ToList());
+                return new List<Task>(tasks.Where(task => task.Title.ToLower().Contains(substringToSearch)).ToList());
             }
             else
             {
