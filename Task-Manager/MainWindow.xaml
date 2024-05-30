@@ -30,7 +30,7 @@
         
         <!--Категории-->
         <GroupBox Header="Категории" BorderThickness="3" Grid.Column="1" Margin="10,10,5,10" Padding="10">
-            <ComboBox x:Name="CategoryBox" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="CategoryBox_SelectionChanged">
+            <ComboBox x:Name="CategoryBox" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="SortingBox_SelectionChanged">
                 <ComboBoxItem Content="Все"/>
                 <ComboBoxItem Content="Работа"/>
                 <ComboBoxItem Content="Дом"/>
@@ -41,7 +41,7 @@
         
         <!--Приоритет-->
         <GroupBox Header="Приоритет" BorderThickness="3" Grid.Column="2" Margin="10,10,5,10" Padding="10">
-            <ComboBox x:Name="PriorityBox" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="PriorityBox_SelectionChanged">
+            <ComboBox x:Name="PriorityBox" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="SortingBox_SelectionChanged">
                 <ComboBoxItem Content="Все"/>
                 <ComboBoxItem Content="Низкий"/>
                 <ComboBoxItem Content="Средний"/>
@@ -51,7 +51,7 @@
         
         <!--Дедлайн-->
         <GroupBox Header="Дедлайн" BorderThickness="3" Grid.Column="3" Margin="10,10,5,10" Padding="10">
-            <ComboBox x:Name="Deadline" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="Deadline_SelectionChanged">
+            <ComboBox x:Name="Deadline" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="SortingBox_SelectionChanged">
                 <ComboBoxItem Content="Скоро"/>
                 <ComboBoxItem Content="Не скоро"/>
             </ComboBox>

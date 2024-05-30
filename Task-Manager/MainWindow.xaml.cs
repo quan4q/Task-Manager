@@ -48,7 +48,7 @@ namespace Task_Manager
             filteredTasks = FilterByPriority(Tasks);
             filteredTasks = FilterByCategory(filteredTasks);
             filteredTasks = FilterByTime(filteredTasks);
-            filteredTasks = FilterByTitle(filteredTasks);
+            filteredTasks = FilterBySearch(filteredTasks);
 
             return filteredTasks;
         }
@@ -102,12 +102,13 @@ namespace Task_Manager
             }
         }
 
-        public List<Task> FilterByTitle(List<Task> tasks)
+        public List<Task> FilterBySearch(List<Task> tasks)
         {
             if (!string.IsNullOrEmpty(SearchBox.Text))
             {
                 string substringToSearch = SearchBox.Text.ToLower();
-                return new List<Task>(tasks.Where(task => task.Title.ToLower().Contains(substringToSearch)).ToList());
+                return new List<Task>(tasks.Where(task => task.Title.ToLower().Contains(substringToSearch) ||
+                task.Description.ToLower().Contains(substringToSearch)).ToList());
             }
             else
             {
@@ -115,23 +116,7 @@ namespace Task_Manager
             }
         }
         //Попробовать сделать лист не null, постоянные проверки это не красиво
-        private void PriorityBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (TasksList != null)
-            {
-                UpdateTasksList();
-            }
-        }
-
-        private void CategoryBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (TasksList != null)
-            {
-                UpdateTasksList();
-            }
-        }
-
-        private void Deadline_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SortingBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (TasksList != null)
             {
