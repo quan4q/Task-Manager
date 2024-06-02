@@ -58,7 +58,7 @@
         </GroupBox>
         
         <!--Кнопка для новой задачи-->
-        <Button x:Name="AddTaskButton" Content="Новая задача" Grid.Column="4" Margin="9,21,14,14" Click="AddTaskButton_Click"/>
+        <Button x:Name="AddTaskButton" Style="{DynamicResource MainButtonsStyle}" Content="Новая задача" Grid.Column="4" Margin="9,21,14,14" Click="AddTaskButton_Click"/>
         
         <!--Лист с задачами-->
         <GroupBox Header="Задачи" BorderThickness="3" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4" Margin="10,-10,10,10" Padding="10">
