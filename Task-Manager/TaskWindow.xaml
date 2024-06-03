@@ -37,7 +37,7 @@
         </GroupBox>
         
         <!--Категория-->
-        <GroupBox Header="Категория" Grid.Row="3" BorderThickness="3" Margin="5,-5,5,5" Padding="10">
+        <GroupBox Header="Категория" Grid.Row="3" BorderThickness="0" Margin="5,0" Padding="5">
             <ComboBox x:Name="CategoryBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <ComboBoxItem Content="Работа"/>
                 <ComboBoxItem Content="Дом"/>
@@ -46,7 +46,7 @@
         </GroupBox>
         
         <!--Приоритет-->
-        <GroupBox Header="Приоритет" Grid.Row="3" Grid.Column="1" BorderThickness="3" Margin="5,-5,5,5" Padding="10">
+        <GroupBox Header="Приоритет" Grid.Row="3" Grid.Column="1" BorderThickness="0" Margin="5,0" Padding="5">
             <ComboBox x:Name="PriorityBox" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <ComboBoxItem Content="Низкий"/>
                 <ComboBoxItem Content="Средний"/>

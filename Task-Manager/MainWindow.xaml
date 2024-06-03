@@ -29,8 +29,8 @@
         </GroupBox>
         
         <!--Категории-->
-        <GroupBox Header="Категории" BorderThickness="3" Grid.Column="1" Margin="10,10,5,10" Padding="10">
-            <ComboBox x:Name="CategoryBox" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="SortingBox_SelectionChanged">
+        <GroupBox Header="Категории" Grid.Column="1" BorderThickness="0" Margin="5,10" Padding="5">
+            <ComboBox x:Name="CategoryBox" SelectedIndex="0" SelectionChanged="SortingBox_SelectionChanged">
                 <ComboBoxItem Content="Все"/>
                 <ComboBoxItem Content="Работа"/>
                 <ComboBoxItem Content="Дом"/>
@@ -40,8 +40,8 @@
         </GroupBox>
         
         <!--Приоритет-->
-        <GroupBox Header="Приоритет" BorderThickness="3" Grid.Column="2" Margin="10,10,5,10" Padding="10">
-            <ComboBox x:Name="PriorityBox" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="SortingBox_SelectionChanged">
+        <GroupBox Header="Приоритет" Grid.Column="2" BorderThickness="0" Margin="5,10" Padding="5">
+            <ComboBox x:Name="PriorityBox" SelectedIndex="0" SelectionChanged="SortingBox_SelectionChanged">
                 <ComboBoxItem Content="Все"/>
                 <ComboBoxItem Content="Низкий"/>
                 <ComboBoxItem Content="Средний"/>
@@ -50,8 +50,8 @@
         </GroupBox>
         
         <!--Дедлайн-->
-        <GroupBox Header="Дедлайн" BorderThickness="3" Grid.Column="3" Margin="10,10,5,10" Padding="10">
-            <ComboBox x:Name="Deadline" SelectedIndex="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="SortingBox_SelectionChanged">
+        <GroupBox Header="Дедлайн" Grid.Column="3" BorderThickness="0" Margin="5,10" Padding="5">
+            <ComboBox x:Name="Deadline" SelectedIndex="0" SelectionChanged="SortingBox_SelectionChanged">
                 <ComboBoxItem Content="Скоро"/>
                 <ComboBoxItem Content="Не скоро"/>
             </ComboBox>
