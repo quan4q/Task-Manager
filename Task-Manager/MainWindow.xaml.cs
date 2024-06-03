@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using Notification.Wpf;
+
 
 namespace Task_Manager
 {
@@ -30,7 +30,8 @@ namespace Task_Manager
         private void UpdateTasksList()
         {
             Tasks = App.Database.GetTasks();
-            TasksList.ItemsSource = FilterTasks();
+            FilterTasks();
+            TasksList.ItemsSource = Tasks;
         }
 
         private void AddTaskButton_Click(object sender, RoutedEventArgs e)
@@ -41,81 +42,68 @@ namespace Task_Manager
         }
 
         //Применение фильтров к коллекции
-        public List<Task> FilterTasks()
+        private void FilterTasks()
         {
-            List<Task> filteredTasks = Tasks;
-
-            filteredTasks = FilterByPriority(filteredTasks);
-            filteredTasks = FilterByCategory(filteredTasks);
-            filteredTasks = FilterByTime(filteredTasks);
-            filteredTasks = FilterBySearch(filteredTasks);
-
-            return filteredTasks;
+            FilterByPriority();
+            FilterByCategory();
+            FilterByTime();
+            FilterBySearch();
         }
 
-        public List<Task> FilterByPriority(List<Task> tasks)
+        private void FilterByPriority()
         {
             ComboBoxItem selectedPriority = (ComboBoxItem)PriorityBox.SelectedItem;
             string priorityFilter = selectedPriority.Content.ToString();
 
             if (priorityFilter != "Все")
             {
-                return tasks.Where(task => task.Priority == priorityFilter).ToList();
-            }
-            else
-            {
-                return tasks;
+                Tasks = Tasks.Where(task => task.Priority == priorityFilter).ToList();
             }
         }
 
-        public List<Task> FilterByCategory(List<Task> tasks)
+        private void FilterByCategory()
         {
             ComboBoxItem selectedCategory = (ComboBoxItem)CategoryBox.SelectedItem;
             string categoryFilter = selectedCategory.Content.ToString();
 
             if (categoryFilter != "Все" && categoryFilter != "Архив")
             {
-                return tasks.Where(task => (task.Category == categoryFilter) && (task.IsCompleted == false)).ToList();
+                Tasks = Tasks.Where(task => (task.Category == categoryFilter) && (task.IsCompleted == false)).ToList();
             }
             else if (categoryFilter == "Архив")
             {
-                return tasks.Where(task => task.IsCompleted == true).ToList();
+                Tasks = Tasks.Where(task => task.IsCompleted == true).ToList();
             }
             else
             {
-                return tasks.Where(task => task.IsCompleted == false).ToList();
+                Tasks = Tasks.Where(task => task.IsCompleted == false).ToList();
             }
         }
 
-        public List<Task> FilterByTime(List<Task> tasks)
+        private void FilterByTime()
         {
             ComboBoxItem selectedSort = (ComboBoxItem)Deadline.SelectedItem;
             string deadlineFilter = selectedSort.Content.ToString();
 
             if (deadlineFilter == "Скоро")
             {
-                return tasks.OrderBy(task => task.Deadline).ToList();
+                Tasks = Tasks.OrderBy(task => task.Deadline).ToList();
             }
             else
             {
-                return tasks.OrderByDescending(task => task.Deadline).ToList();
+                Tasks = Tasks.OrderByDescending(task => task.Deadline).ToList();
             }
         }
 
-        public List<Task> FilterBySearch(List<Task> tasks)
+        private void FilterBySearch()
         {
             if (!string.IsNullOrEmpty(SearchBox.Text))
             {
                 string substringToSearch = SearchBox.Text.ToLower();
-                return tasks.Where(task => task.Title.ToLower().Contains(substringToSearch) || 
-                                    task.Description.ToLower().Contains(substringToSearch)).ToList();
-            }
-            else
-            {
-                return tasks;
+                Tasks = Tasks.Where(task => task.Title.ToLower().Contains(substringToSearch) || task.Description.ToLower().Contains(substringToSearch)).ToList();
             }
         }
-        //Попробовать сделать лист не null, постоянные проверки это не красиво
+
         private void SortingBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (TasksList != null)
@@ -134,6 +122,7 @@ namespace Task_Manager
 
         private void TaskWindow_Closed(object? sender, EventArgs e)
         {
+            TasksList.SelectedItem = null;
             UpdateTasksList();
         }
 
@@ -142,14 +131,7 @@ namespace Task_Manager
             Button button = sender as Button;
             Task selectedTask = button.DataContext as Task;
 
-            if (selectedTask.IsCompleted == false)
-            {
-                selectedTask.IsCompleted = true;
-            }
-            else
-            {
-                selectedTask.IsCompleted = false;
-            }
+            selectedTask.IsCompleted = !selectedTask.IsCompleted;
 
             App.Database.UpdateTask(selectedTask);
             UpdateTasksList();
@@ -161,7 +143,7 @@ namespace Task_Manager
             Task selectedTask = button.DataContext as Task;
 
             MessageBoxResult messageBoxAnswer = MessageBox.Show("Вы действительно хотите удалить задачу?", "Подтверждение удаления",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
+                                                                MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (messageBoxAnswer == MessageBoxResult.Yes)
             {

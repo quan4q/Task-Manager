@@ -52,7 +52,7 @@ namespace Task_Manager
         public void AddTask(Task task)
         {
             using SqliteConnection connection = GetConnection();
-            string formattedDeadline = task.Deadline.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            string formattedDeadline = task.Deadline.ToString("yyyy-MM-dd HH:mm:ss");
 
             using SqliteCommand command = new($@"INSERT INTO tasks (
                                                 Title, Description, Deadline, Category,
@@ -77,7 +77,7 @@ namespace Task_Manager
         public void UpdateTask(Task task)
         {
             using SqliteConnection connection = GetConnection();
-            string formattedDeadline = task.Deadline.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            string formattedDeadline = task.Deadline.ToString("yyyy-MM-dd HH:mm:ss");
 
             using SqliteCommand command = new($@"UPDATE tasks SET
                                                 Title='{task.Title}', Description='{task.Description}',
@@ -92,7 +92,6 @@ namespace Task_Manager
         private void UpdateCache() 
         {
             using SqliteConnection connection = GetConnection();
-
             using SqliteCommand command = new("SELECT * FROM tasks", connection);
             using SqliteDataReader reader = command.ExecuteReader();
 

@@ -20,8 +20,8 @@ namespace Task_Manager
     /// </summary>
     public partial class TaskWindow : Window
     {
-        private bool IsRedacted;
-        private Task RedactedTask;
+        private readonly bool IsRedacted;
+        private readonly Task RedactedTask;
 
         public TaskWindow()
         {
@@ -70,7 +70,7 @@ namespace Task_Manager
                 {
                     Title = TitleBox.Text,
                     Description = DescriptionBox.Text,
-                    Deadline = DeadlineDTP.Value,
+                    Deadline = (DateTime)DeadlineDTP.Value,
                     Category = CategoryBox.Text,
                     Priority = PriorityBox.Text,
                 };
@@ -81,19 +81,19 @@ namespace Task_Manager
             {
                 RedactedTask.Title = TitleBox.Text;
                 RedactedTask.Description = DescriptionBox.Text;
-                RedactedTask.Deadline = DeadlineDTP.Value;
+                RedactedTask.Deadline = (DateTime)DeadlineDTP.Value;
                 RedactedTask.Category = CategoryBox.Text;
                 RedactedTask.Priority = PriorityBox.Text;
 
                 App.Database.UpdateTask(RedactedTask);
             }
 
-            this.Close();
+            Close();
         }
 
         private void CancelTaskButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Task_Manager
             {
                 Title = "ВНИМАНИЕ!",
                 Message = $"Задание {taskTitle} близится к дедлайну! " + timeLeft,
-                Type = NotificationType.Warning,
+                Type = NotificationType.Information,
             };
 
             NotificationManager.Show(deadlineNotification);
@@ -50,17 +50,23 @@ namespace Task_Manager
             {
                 if (task.IsCompleted == false)
                 {
-                    TimeSpan remainingTime = (TimeSpan)(task.Deadline - DateTime.Now);
+                    CheckTaskDeadline(task);
+                }
+            }
+        }
 
-                    foreach (KeyValuePair<TimeSpan, string> notification in Notifications)
-                    {
-                        if (remainingTime.Days == notification.Key.Days &&
-                            remainingTime.Hours == notification.Key.Hours &&
-                            remainingTime.Minutes == notification.Key.Minutes)
-                        {
-                            ShowNotification(task.Title, notification.Value);
-                        }
-                    }
+        private void CheckTaskDeadline(Task task)
+        {
+            TimeSpan remainingTime = (TimeSpan)(task.Deadline - DateTime.Now);
+
+            foreach (KeyValuePair<TimeSpan, string> notification in Notifications)
+            {
+                if (remainingTime.Days == notification.Key.Days &&
+                    remainingTime.Hours == notification.Key.Hours &&
+                    remainingTime.Minutes == notification.Key.Minutes)
+                {
+                    ShowNotification(task.Title, notification.Value);
+                    break;
                 }
             }
         }
