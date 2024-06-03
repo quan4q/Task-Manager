@@ -61,47 +61,44 @@
         <Button x:Name="AddTaskButton" Style="{DynamicResource MainButtonsStyle}" Content="Новая задача" Grid.Column="4" Margin="15" Click="AddTaskButton_Click"/>
         
         <!--Лист с задачами-->
-        <GroupBox Header="Задачи" BorderThickness="3" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4" Margin="10,-10,10,10" Padding="10">
+        <GroupBox Header="Задачи" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4" BorderThickness="0" Margin="5,-15,5,10" Padding="5">
             <ListView x:Name="TasksList" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" MouseDoubleClick="TasksList_MouseDoubleClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="LightSlateGray" BorderThickness="2">
-                            <Grid>
-                                <!--Компановка элемента списка-->
-                                <!--NOTE: возможно в будущем будет меняться, потому что сейчас сделано не очень.-->
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition Width="110"/>
-                                    <ColumnDefinition Width="750"/>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <!--Название задачи-->
-                                <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <Grid>
+                            <!--Компановка элемента списка-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="115"/>
+                                <ColumnDefinition Width="725"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="85"/>
+                                <ColumnDefinition Width="85"/>
+                            </Grid.ColumnDefinitions>
 
-                                <!--Дедлайн задачи-->
-                                <TextBlock Text="{Binding Deadline, StringFormat={}{0:d.MM.yy HH:mm}}" Grid.Column="1" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!--Название задачи-->
+                            <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
-                                <!--Описание задачи-->
-                                <TextBlock Text="{Binding Description}" Grid.Column="2" TextWrapping="Wrap" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <!--Дедлайн задачи-->
+                            <TextBlock Text="{Binding Deadline, StringFormat={}{0:dd.MM.yy HH:mm}}" Grid.Column="1" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
-                                <!--Категория задачи-->
-                                <TextBlock Text="{Binding Category}" Grid.Column="3" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!--Описание задачи-->
+                            <TextBlock Text="{Binding Description}" Grid.Column="2" TextWrapping="Wrap" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
-                                <!--Приоритет задачи-->
-                                <TextBlock Text="{Binding Priority}" Grid.Column="4" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!--Категория задачи-->
+                            <TextBlock Text="{Binding Category}" Grid.Column="3" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                                <!--Блок кнопок задачи-->
-                                <StackPanel Orientation="Horizontal" Grid.Column="5">
-                                    <!--Завершить задачу-->
-                                    <Button x:Name="CompleteButton" Content="✅" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CompleteButton_Click"/>
-                                    <!--Удалить задачу-->
-                                    <Button x:Name="DeleteButton" Content="🗑️" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DeleteButton_Click"/>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
+                            <!--Приоритет задачи-->
+                            <TextBlock Text="{Binding Priority}" Grid.Column="4" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                            <!--Блок кнопок задачи-->
+                            <StackPanel Orientation="Horizontal" Grid.Column="5">
+                                <!--Завершить задачу-->
+                                <Button x:Name="CompleteButton" Style="{DynamicResource ListButtonsStyle}" Background="ForestGreen" Content="✅" Click="CompleteButton_Click"/>
+                                <!--Удалить задачу-->
+                                <Button x:Name="DeleteButton" Style="{DynamicResource ListButtonsStyle}" Background="IndianRed" Content="🗑" Click="DeleteButton_Click"/>
+                            </StackPanel>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
