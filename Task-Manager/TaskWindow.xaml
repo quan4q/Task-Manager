@@ -32,8 +32,8 @@
         </GroupBox>
         
         <!--Дедлайн-->
-        <GroupBox Header="Дедлайн" BorderThickness="3" Grid.Row="2" Grid.ColumnSpan="2" Margin="5,-5,5,5" Padding="10">
-            <xctk:DateTimePicker x:Name="DeadlineDTP"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Format="Custom" FormatString="dd.MM.yy HH:mm" ShowButtonSpinner="False"/>
+        <GroupBox Header="Дедлайн" Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="0" Margin="5,0" Padding="5">
+            <xctk:DateTimePicker x:Name="DeadlineDTP"/>
         </GroupBox>
         
         <!--Категория-->
