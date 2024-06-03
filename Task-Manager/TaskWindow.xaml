@@ -1,0 +1,65 @@
+﻿<Window x:Class="Task_Manager.TaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:Task_Manager"
+        mc:Ignorable="d"
+        Title="TaskWindow" Height="530" Width="375" ResizeMode="NoResize" FontSize="14">
+    <Grid>
+        <!--Компановка-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85"/>
+            <RowDefinition Height="180"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!--Название-->
+        <GroupBox Header=" Название:" Grid.ColumnSpan="2" BorderThickness="0" Margin="5,10,5,0" Padding="5">
+            <TextBox x:Name="TitleBox" Style="{DynamicResource TextBoxsStyle}" VerticalContentAlignment="Center"/>
+        </GroupBox>
+        
+        <!--Описание-->
+        <GroupBox Header=" Описание:" Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="0" Margin="5,0,5,0" Padding="5">
+            <TextBox x:Name="DescriptionBox" Style="{DynamicResource TextBoxsStyle}" Padding="5" TextWrapping="Wrap"/>
+        </GroupBox>
+        
+        <!--Дедлайн-->
+        <GroupBox Header=" Дедлайн:" Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="0" Margin="5,0,5,0" Padding="5">
+            <Border Background="#DDE9F5" CornerRadius="10">
+                <xctk:DateTimePicker x:Name="DeadlineDTP" Margin="0,0,6,0"/>
+            </Border>
+        </GroupBox>
+        
+        <!--Категория-->
+        <GroupBox Header=" Категория:" Grid.Row="3" BorderThickness="0" Margin="5,0,0,0" Padding="5">
+            <ComboBox x:Name="CategoryBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <ComboBoxItem Content="Работа"/>
+                <ComboBoxItem Content="Дом"/>
+                <ComboBoxItem Content="Учёба"/>
+            </ComboBox>
+        </GroupBox>
+        
+        <!--Приоритет-->
+        <GroupBox Header=" Приоритет:" Grid.Row="3" Grid.Column="1" BorderThickness="0" Margin="0,0,5,0" Padding="5">
+            <ComboBox x:Name="PriorityBox" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <ComboBoxItem Content="Низкий"/>
+                <ComboBoxItem Content="Средний"/>
+                <ComboBoxItem Content="Высокий"/>
+            </ComboBox>
+        </GroupBox>
+        
+        <!--Кнопка для сохранения задачи-->
+        <Button x:Name="SaveTaskButton" Style="{DynamicResource MainButtonsStyle}" Content="Сохранить" Grid.Row="4" Grid.Column="1" Margin="10,10,15,15" Click="SaveTaskButton_Click"/>
+
+        <!--Кнопка для отмены действий-->
+        <Button x:Name="CancelTaskButton" Style="{DynamicResource MainButtonsStyle}" Content="Отмена" Grid.Row="4" Margin="15,10,10,15" Click="CancelTaskButton_Click"/>
+    </Grid>
+</Window>
