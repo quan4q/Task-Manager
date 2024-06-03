@@ -188,93 +188,20 @@
         
         <!--Стиль для селектора дедлайна-->
         <Style TargetType="{x:Type xctk:DateTimePicker}">
-            <Setter Property="Background" Value="#DDE9F5"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Format" Value="Custom"/>
             <Setter Property="FormatString" Value="dd.MM.yy HH:mm"/>
             <Setter Property="ShowButtonSpinner" Value="False"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type xctk:DateTimePicker}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+        </Style>
 
-                            <Border Name="OutBorder"
-                                    Background="{TemplateBinding Background}"
-                                    CornerRadius="10,0,0,0"
-                                    Visibility="Hidden"/>
-                            <Border Background="{TemplateBinding Background}" CornerRadius="10,0,0,10">
-                                <xctk:DateTimeUpDown FormatString="{TemplateBinding FormatString}" 
-                                                     Format="{TemplateBinding Format}"
-				                                     ShowButtonSpinner="{TemplateBinding ShowButtonSpinner}" 
-				                                     Value="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}"
-                                                     Background="Transparent"
-                                                     BorderThickness="{TemplateBinding BorderThickness}"/>
-                            </Border>
-
-                            <ToggleButton x:Name="CalendarToggleButton" Background="{TemplateBinding Background}"
-                                          IsChecked="{Binding IsOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                                          Grid.Column="1" >
-                                <ToggleButton.Style>
-                                    <Style TargetType="{x:Type ToggleButton}">
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                    <Border Background="{TemplateBinding Background}" CornerRadius="0,10,10,0">
-                                                        <Grid SnapsToDevicePixels="True">
-                                                            <xctk:ButtonChrome Background="Transparent" BorderThickness="{TemplateBinding BorderThickness}"/>
-                                                            <Grid>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                    <ColumnDefinition Width="30"/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" 
-                                                                                  Content="{TemplateBinding Content}" 
-                                                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}" 
-                                                                                  HorizontalAlignment="Stretch" 
-                                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                                                                  VerticalAlignment="Stretch"/>
-                                                                <Grid Grid.Column="1" IsHitTestVisible="False" Margin="5">
-                                                                    <Path Data="M 0 0 L 4 4 L 8 0 Z" 
-                                                                          HorizontalAlignment="Center" 
-                                                                          VerticalAlignment="Center" 
-                                                                          Fill="Black"/>
-                                                                </Grid>
-                                                            </Grid>
-                                                        </Grid>
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ToggleButton.Style>
-                            </ToggleButton>
-
-                            <Popup IsOpen="{Binding IsChecked, ElementName=CalendarToggleButton}" StaysOpen="False">
-                                <Border Padding="3" Background="{TemplateBinding Background}">
-                                    <StackPanel Background="{TemplateBinding Background}">
-                                        <Calendar DisplayDate="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}"
-                                                  Background="{TemplateBinding Background}"
-                                                  SelectedDate="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}"/>
-                                        <xctk:TimePicker Value="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}"/>
-                                    </StackPanel>
-                                </Border>
-                            </Popup>
-
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsOpen" Value="True">
-                                <Setter TargetName="OutBorder" Property="Visibility" Value="Visible"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        <Style TargetType="{x:Type xctk:ButtonChrome}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="RenderMouseOver" Value="False"/>
+            <Setter Property="Height" Value="20"/>
         </Style>
 
     </Application.Resources>
