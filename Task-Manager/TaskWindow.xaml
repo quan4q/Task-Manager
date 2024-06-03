@@ -22,22 +22,22 @@
         </Grid.ColumnDefinitions>
         
         <!--Название-->
-        <GroupBox Header="Название" Grid.ColumnSpan="2" BorderThickness="0" Margin="5,5,5,10" Padding="5">
+        <GroupBox Header=" Название:" Grid.ColumnSpan="2" BorderThickness="0" Margin="5,10,5,0" Padding="5">
             <TextBox x:Name="TitleBox" Style="{DynamicResource TextBoxsStyle}" VerticalContentAlignment="Center"/>
         </GroupBox>
         
         <!--Описание-->
-        <GroupBox Header="Описание" Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="0" Margin="5,-15,5,10" Padding="5">
+        <GroupBox Header=" Описание:" Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="0" Margin="5,0,5,0" Padding="5">
             <TextBox x:Name="DescriptionBox" Style="{DynamicResource TextBoxsStyle}" Padding="5" TextWrapping="Wrap"/>
         </GroupBox>
         
         <!--Дедлайн-->
-        <GroupBox Header="Дедлайн" Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="0" Margin="5,0" Padding="5">
+        <GroupBox Header=" Дедлайн:" Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="0" Margin="5,0,5,0" Padding="5">
             <xctk:DateTimePicker x:Name="DeadlineDTP"/>
         </GroupBox>
         
         <!--Категория-->
-        <GroupBox Header="Категория" Grid.Row="3" BorderThickness="0" Margin="5,0" Padding="5">
+        <GroupBox Header=" Категория:" Grid.Row="3" BorderThickness="0" Margin="5,0,0,0" Padding="5">
             <ComboBox x:Name="CategoryBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <ComboBoxItem Content="Работа"/>
                 <ComboBoxItem Content="Дом"/>
@@ -46,7 +46,7 @@
         </GroupBox>
         
         <!--Приоритет-->
-        <GroupBox Header="Приоритет" Grid.Row="3" Grid.Column="1" BorderThickness="0" Margin="5,0" Padding="5">
+        <GroupBox Header=" Приоритет:" Grid.Row="3" Grid.Column="1" BorderThickness="0" Margin="0,0,5,0" Padding="5">
             <ComboBox x:Name="PriorityBox" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <ComboBoxItem Content="Низкий"/>
                 <ComboBoxItem Content="Средний"/>
@@ -55,9 +55,9 @@
         </GroupBox>
         
         <!--Кнопка для сохранения задачи-->
-        <Button x:Name="SaveTaskButton" Style="{DynamicResource MainButtonsStyle}" Content="Сохранить" Grid.Row="4" Grid.Column="1" Margin="10" Click="SaveTaskButton_Click"/>
+        <Button x:Name="SaveTaskButton" Style="{DynamicResource MainButtonsStyle}" Content="Сохранить" Grid.Row="4" Grid.Column="1" Margin="10,10,15,15" Click="SaveTaskButton_Click"/>
 
         <!--Кнопка для отмены действий-->
-        <Button x:Name="CancelTaskButton" Style="{DynamicResource MainButtonsStyle}" Content="Отмена" Grid.Row="4" Margin="10" Click="CancelTaskButton_Click"/>
+        <Button x:Name="CancelTaskButton" Style="{DynamicResource MainButtonsStyle}" Content="Отмена" Grid.Row="4" Margin="15,10,10,15" Click="CancelTaskButton_Click"/>
     </Grid>
 </Window>

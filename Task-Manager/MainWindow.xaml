@@ -24,12 +24,12 @@
         </Grid.RowDefinitions>
         
         <!--Поиск-->
-        <GroupBox Header="Поиск" BorderThickness="0" Margin="5,10" Padding="5">
+        <GroupBox Header=" Поиск" BorderThickness="0" Margin="5,11" Padding="5">
             <TextBox x:Name="SearchBox" Style="{DynamicResource TextBoxsStyle}" VerticalContentAlignment="Center" TextChanged="SearchBox_TextChanged"/>
         </GroupBox>
         
         <!--Категории-->
-        <GroupBox Header="Категории" Grid.Column="1" BorderThickness="0" Margin="5,10" Padding="5">
+        <GroupBox Header=" Категории" Grid.Column="1" BorderThickness="0" Margin="0,10" Padding="5">
             <ComboBox x:Name="CategoryBox" SelectedIndex="0" SelectionChanged="SortingBox_SelectionChanged">
                 <ComboBoxItem Content="Все"/>
                 <ComboBoxItem Content="Работа"/>
@@ -40,7 +40,7 @@
         </GroupBox>
         
         <!--Приоритет-->
-        <GroupBox Header="Приоритет" Grid.Column="2" BorderThickness="0" Margin="5,10" Padding="5">
+        <GroupBox Header=" Приоритет" Grid.Column="2" BorderThickness="0" Margin="0,10" Padding="5">
             <ComboBox x:Name="PriorityBox" SelectedIndex="0" SelectionChanged="SortingBox_SelectionChanged">
                 <ComboBoxItem Content="Все"/>
                 <ComboBoxItem Content="Низкий"/>
@@ -50,7 +50,7 @@
         </GroupBox>
         
         <!--Дедлайн-->
-        <GroupBox Header="Дедлайн" Grid.Column="3" BorderThickness="0" Margin="5,10" Padding="5">
+        <GroupBox Header=" Дедлайн" Grid.Column="3" BorderThickness="0" Margin="0,10" Padding="5">
             <ComboBox x:Name="Deadline" SelectedIndex="0" SelectionChanged="SortingBox_SelectionChanged">
                 <ComboBoxItem Content="Скоро"/>
                 <ComboBoxItem Content="Не скоро"/>
@@ -61,7 +61,7 @@
         <Button x:Name="AddTaskButton" Style="{DynamicResource MainButtonsStyle}" Content="Новая задача" Grid.Column="4" Margin="15" Click="AddTaskButton_Click"/>
         
         <!--Лист с задачами-->
-        <GroupBox Header="Задачи" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4" BorderThickness="0" Margin="5,-15,5,10" Padding="5">
+        <GroupBox Header=" Задачи:" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4" BorderThickness="0" Margin="5,-15,5,10" Padding="5">
             <ListView x:Name="TasksList" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" MouseDoubleClick="TasksList_MouseDoubleClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>

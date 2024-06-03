@@ -55,7 +55,7 @@
                     <ControlTemplate TargetType="{x:Type ComboBox}">
                         <Grid>
                             <Border Name="OutBorder"
-                                    Background="{TemplateBinding Background}"
+                                    Background="#B0C4DE"
                                     CornerRadius="10,10,0,0"
                                     Visibility="Hidden"/>
                             <Border Name="Border"
@@ -100,7 +100,7 @@
                                 <Grid SnapsToDevicePixels="True"
                                       MinWidth="{TemplateBinding ActualWidth}"
                                       MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                    <Border Background="{TemplateBinding Background}" CornerRadius="0,0,10,10">
+                                    <Border Background="#B0C4DE" CornerRadius="0,0,10,10">
                                         <ScrollViewer CanContentScroll="True" >
                                             <ItemsPresenter SnapsToDevicePixels="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
                                         </ScrollViewer>
